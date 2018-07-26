@@ -1,0 +1,6 @@
+String datePatter="DD-MMM-YYYY"
+datePatter=datePatter.replaceAll("DD","([0-9]{2})")
+datePatter=datePatter.replaceAll("MMM","([a-zA-z]{3})")
+datePatter=datePatter.replaceAll("YYYY","([0-9]{4})")
+
+Date_To_Be_Checked_In_String.matches(datePattern)

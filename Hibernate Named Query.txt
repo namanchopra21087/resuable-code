@@ -1,0 +1,1885 @@
+package com.im.imc.issuer.ca.model;
+
+import static com.im.imc.core.base.IMCPCAMDataType.CREATED_BY_COLUMN_NAME;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.ACTV;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.ACTV_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BIDS;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BIDS_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BONU;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BONU_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BPUT;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.BPUT_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CAPD;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CAPD_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CAPG;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CAPG_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CASH_DIV_ACTION_TYPE_CD;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CHAN;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CHAN_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CMET;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CMET_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CONV;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.CONV_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DECR;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DECR_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DLST;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DLST_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DRIP;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DRIP_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVCA;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVCA_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVOP;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVOP_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVSC;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.DVSC_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.EXOF;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.EXOF_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.EXWA;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.EXWA_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.INTR;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.INTR_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.LIQU;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.LIQU_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MCAL;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MCAL_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MEET;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MEET_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MRGR;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.MRGR_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PARI;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PARI_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PCAL;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PCAL_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_ELIGIBILITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_ELIGIBILITY_EXCLUSION;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_ELIGIBILITY_PROCESSING;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_PAYMENT_ADVICE;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_PAYMENT_OF_CDP_SERVICE;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.PENDING_REMITTANCE_TO_CDP;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.REDM;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.REDM_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.RHDI;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.RHTS_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SOFF;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SOFF_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SPLF;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SPLF_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SPLR;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SPLR_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SUSP;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.SUSP_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.TEND;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.TEND_ENTITY;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.UPDATED_PENDING_COMPLETION;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.XMET;
+import static com.im.imc.issuer.ca.constants.ICorporateActionConstants.XMET_ENTITY;
+import static com.im.imc.issuer.ca.model.CorporateAction.FILTER_CORPORATE_ACTION_BY_CREATOR_FILTER;
+import static com.im.imc.issuer.ca.model.CorporateAction.FILTER_CORPORATE_ACTION_BY_SECURITY_LIST_DAP_FILTER;
+import static com.im.imc.issuer.ca.model.CorporateAction.USER_ID;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
+
+import com.im.authentication.user.constant.IUserConstant;
+import com.im.authentication.user.model.User;
+import com.im.imc.core.annotations.SwiftValidation;
+import com.im.imc.core.base.IMCPCAMDataType;
+import com.im.imc.core.constants.IIMCBusniessConstants;
+import com.im.imc.core.imdate.xstream.IMSwiftDateTimeXStreamConverter;
+import com.im.imc.core.imdate.xstream.IMSwiftDateXStreamConverter;
+import com.im.imc.docstore.integration.model.IHasDocumentsStoreEntity;
+import com.im.imc.docstore.integration.model.IMCDocumentStore;
+import com.im.imc.issuer.ca.annotation.IHasIssuerName;
+import com.im.imc.issuer.ca.annotation.IHasSecurityDetails;
+import com.im.imc.issuer.ca.annotation.PopulateSecurityDetails;
+import com.im.imc.issuer.ca.annotation.SecurityDetails;
+import com.im.imc.issuer.ca.announcement.IsAnnounceable;
+import com.im.imc.issuer.ca.constants.ICorporateActionConstants;
+import com.im.imc.issuer.ca.membercircular.iso.noniso.model.MemberCircularField;
+import com.im.imc.issuer.ca.util.CorporateActionUtil;
+import com.im.imc.issuer.issuer.model.Issuer;
+import com.im.imc.issuer.securities.ISecuritiesConstants;
+import com.im.imc.issuer.securities.model.ExternalSecurity;
+import com.im.imc.nonrepudiation.model.INonRepudiatable;
+import com.im.imc.statuschangenotification.model.IHasSecurityOrInvestmentAccount;
+import com.im.imc.statuschangenotification.model.StatusChangeNotification;
+import com.im.pcam.datatypes.misc.IMDate;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+/**
+ * Persistence entity for Corporate Action.
+ * 
+ * @author Mohit Aggarwal
+ */
+@FilterDefs( { @FilterDef(name = FILTER_CORPORATE_ACTION_BY_SECURITY_LIST_DAP_FILTER, parameters = @ParamDef(name = USER_ID, type = "long")),
+        @FilterDef(name = FILTER_CORPORATE_ACTION_BY_CREATOR_FILTER, parameters = @ParamDef(name = CREATED_BY_COLUMN_NAME, type = "long")) })
+@Filters(value = { @Filter(name = FILTER_CORPORATE_ACTION_BY_SECURITY_LIST_DAP_FILTER, condition = " exists (select  1 from user_account ua where ua.USER_ID= :"
+        + CorporateAction.USER_ID
+        + " and "
+        + "to_char("
+        + CorporateAction.SECURITY_ID
+        + ")="
+        + "ua.INVESTMENT_ACC_REFERENCE AND ua.user_account_status_cd = '"
+        + IIMCBusniessConstants.STATUS_ACTIVE
+        + "')"),
+        @Filter(name = FILTER_CORPORATE_ACTION_BY_CREATOR_FILTER, condition = IMCPCAMDataType.CREATED_BY_COLUMN_NAME + "=:" + CREATED_BY_COLUMN_NAME) })
+@NamedQueries(value = { @NamedQuery(name = "getCashDividendInPendingRemittanceStatus", query = "SELECT ca.id FROM CorporateAction AS ca "
+        + "where ca.announcementStatusCd  = '"
+        + PENDING_REMITTANCE_TO_CDP
+        + "' "
+        + "and ca.actionTypeCd  = '"
+        + CASH_DIV_ACTION_TYPE_CD
+        + "'"),
+        @NamedQuery(name = "getPendingCompletion", query = "SELECT ca.id FROM CorporateAction AS ca "
+                + "where ca.announcementStatusCd in ('"
+                + ICorporateActionConstants.PENDING_COMPLETION
+                + "', '"
+                + ICorporateActionConstants.UPDATED_PENDING_COMPLETION
+                + "')"),
+        @NamedQuery(name = "getPendingCompletionForDelistedSecurity", query = "SELECT ca.id FROM CorporateAction ca JOIN ca.caSecurity sec "
+                + " WHERE  sec.statusCode='"
+                + ISecuritiesConstants.SECURITY_STATUS_DELISTED
+                + "'"
+                + " AND ca.announcementStatusCd NOT IN ('"
+                + ICorporateActionConstants.APPROVAL_EXPIRED
+                + "','"
+                + ICorporateActionConstants.COMPLETE
+                + "','"
+                + ICorporateActionConstants.WITHDRAWN
+                + "','"
+                + ICorporateActionConstants.REJECTED_BY_SHAREHOLDER
+                + "')"),
+        @NamedQuery(name = "getCAIDsForAttachmentPurge", query = "SELECT ca.id FROM CorporateAction AS ca "
+                + "where ca.announcementStatusCd in ('"
+                + ICorporateActionConstants.APPROVAL_EXPIRED
+                + "', '"
+                + ICorporateActionConstants.COMPLETE
+                + "', '"
+                + ICorporateActionConstants.WITHDRAWN
+                + "', '"
+                + ICorporateActionConstants.REJECTED_BY_SHAREHOLDER
+                + "') AND "
+                + " ca.lastUpdateDate < sysDate-:noOfDays")
+})
+@Entity
+@Table(name = CorporateAction.TABLE_NAME)
+@XStreamAlias("CorporateAction")
+public class CorporateAction extends IMCPCAMDataType implements IHasSecurityOrInvestmentAccount, IHasDocumentsStoreEntity, INonRepudiatable,
+        IsAnnounceable, IHasIssuerName, IHasSecurityDetails {
+
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Filter Name by User's DAP
+     */
+    public static final String FILTER_CORPORATE_ACTION_BY_SECURITY_LIST_DAP_FILTER = "FILTER_CORPORATE_ACTION_BY_SECURITY_LIST";
+
+    /**
+     * Filter by "Created By"
+     */
+    public static final String FILTER_CORPORATE_ACTION_BY_CREATOR_FILTER = "FILTER_CORPORATE_ACTION_BY_CREATOR";
+    /**
+     * Filter Parameter
+     */
+    public static final String USER_ID = "userId";
+
+    public static final String TABLE_NAME = "CORPORATE_ACTION";
+    public static final String CORPORATE_ACTION_ID = "CORPORATE_ACTION_ID";
+    public static final String ISSUER_ID = "ISSUER_ID";
+    public static final String SECURITY_ID = "SECURITY_ID";
+    public static final String ANNOUNCEMTENT_STATUS_CD = "ANNOUNCEMENT_STATUS_CD";
+    public static final String PROCESSING_STATUS_CD = "PROCESSING_STATUS_CD";
+    public static final String ACTION_TYPE_CD = "ACTION_TYPE";
+    public static final String ACTION_CATEGORY_CD = "ACTION_CATEGORY_CD";
+    public static final String ACTION_INDICATOR_CD = "ACTION_INDICATOR_CD";
+    public static final String REFERENCE = "CORP_ACTION_REFERENCE";
+    public static final String OFFICIAL_REFERENCE = "CORP_ACT_OFFICIAL_REFERENCE";
+    public static final String DESCRIPTION = "DESCRIPTION";
+    public static final String ANNOUNCEMENT_TITLE = "ANNOUNCEMENT_TITLE";
+    public static final String DIVIDEND_TYPE_CD = "DIVIDEND_TYPE_CD";
+    public static final String OVER_SUBSCRIPTION = "OVER_SUBS_ALLOWED_FLAG";
+    public static final String ANNOUNCEMENT_DATE = "ANNOUNCEMENT_DATE";
+    public static final String RECORD_DATE = "RECORD_DATE";
+    public static final String ANNOUNCEMENT_CURRENCY_CD = "ANNOUNCEMENT_CURRENCY_CD";
+    public static final String EX_DATE = "EX_DATE";
+    public static final String EARLIEST_PAY_DATE = "EARLIEST_PAY_DATE";
+    public static final String EARLIEST_DEADLINE_DATE = "EARLIEST_DEADLINE_DATE";
+    public static final String REJECTION_REASON = "REJECTION_REASON";
+    public static final String LAST_SENT_DATE = "LAST_SENT_DATE";
+    public static final String DISSEMINATION_STATUS_CD = "DISSEMINATION_STATUS_CD";
+    public static final String REASON_FOR_WITHDRAWAL = "REASON_FOR_WITHDRAWAL";
+    public static final String RELATED_REFERENCE = "RELATED_REFERENCE";
+
+    @XStreamAlias("Id")
+    private Long id;
+
+    private Long issuerId;
+
+    private Long securityId;
+
+    @XStreamAlias("AnnouncementStatusCd")
+    private String announcementStatusCd;
+
+    @XStreamAlias("ProcessingStatusCd")
+    private String processingStatusCd;
+
+    @XStreamAlias("ActionTypeCd")
+    private String actionTypeCd;
+
+    @XStreamAlias("Periods")
+    private List<CorporateActionPeriod> periods;
+
+    @XStreamAlias("Amounts")
+    private List<CorporateActionAmount> amount;
+
+    @XStreamAlias("ActionCategoryCd")
+    private String actionCategoryCd;
+
+    @XStreamAlias("ActionIndicatorCd")
+    private String actionIndicatorCd;
+
+    @XStreamAlias("Reference")
+    private String reference;
+
+    @XStreamAlias("OfficialReference")
+    private String officialReference;
+
+    @XStreamAlias("Description")
+    private String description;
+
+    @XStreamAlias("AnnouncementTitle")
+    private String announcementTitle;
+
+    @XStreamAlias("DividendTypeCd")
+    private String dividendTypeCd;
+
+    @XStreamAlias("OverSubscription")
+    private String overSubscription;
+
+    @XStreamAlias("AnnouncementCurrencyCd")
+    private String announcementCurrencyCd;
+
+    @XStreamAlias("RelatedReference")
+    private String relatedReference;
+
+    @XStreamAlias("AnnouncementDate")
+    @XStreamConverter(IMSwiftDateXStreamConverter.class)
+    private IMDate announcementDate;
+
+    @XStreamAlias("RecordDate")
+    @XStreamConverter(IMSwiftDateTimeXStreamConverter.class)
+    private IMDate recordDate;
+
+    @XStreamAlias("ExDate")
+    @XStreamConverter(IMSwiftDateTimeXStreamConverter.class)
+    private IMDate exDate;
+
+    @XStreamAlias("EarliestPayDate")
+    @XStreamConverter(IMSwiftDateTimeXStreamConverter.class)
+    private IMDate earliestPayDate;
+
+    @XStreamAlias("EarliestDeadlineDate")
+    @XStreamConverter(IMSwiftDateXStreamConverter.class)
+    private IMDate earliestDeadlineDate;
+
+    @XStreamAlias("Dates")
+    private List<CorporateActionDate> dates;
+
+    @XStreamAlias("Options")
+    private List<CorporateActionOption> options;
+
+    @XStreamAlias("Places")
+    private List<CorporateActionPlace> places;
+
+    @XStreamAlias("Narratives")
+    private List<CorporateActionNarrative> narratives;
+
+    @XStreamAlias("Extensions")
+    private CorporateActionExtension clientExtension;
+
+    @XStreamAlias("Rates")
+    private List<CorporateActionRate> rates;
+
+    @XStreamAlias("Quantities")
+    private List<CorporateActionQuantity> quantities;
+
+    @XStreamAlias("Classifications")
+    private List<CorporateActionClassification> classification;
+
+    @XStreamAlias("CorpActionIntSecurity")
+    private CorporateActionIntSecurity corpActionIntSecurity;
+
+
+    @XStreamAlias("MessageReference")
+    private String messageReference;
+
+    @XStreamAlias("LastMessageReference")
+    private String lastMessageReference;
+
+    @XStreamAlias("MessageFunctionCd")
+    private String messageFunction;
+
+    @XStreamAlias("Issuer")
+    private Issuer issuer;
+
+    @XStreamAlias("Security")
+    private ExternalSecurity security;
+
+    @XStreamAlias("Documents")
+    private List<IMCDocumentStore> documentsStore;
+
+    @XStreamAlias("ReasonForWithdrawal")
+    private String reasonForWithdrawal;
+
+    /**
+     * SDT-67499 created By Full Name for query (only for search purposes)
+     */
+    private String createdByFullNameForQuery;
+
+    @XStreamAlias("Indicators")
+    private List<CorporateActionIndicator> indicators;
+
+    @XStreamOmitField
+    private String screenXml;
+
+    @XStreamAlias("LastSentDate")
+    @XStreamConverter(IMSwiftDateTimeXStreamConverter.class)
+    private IMDate lastSentDate;
+
+    @XStreamAlias("DisseminationStatusCd")
+    private String disseminationStatusCd;
+
+    @XStreamAlias("RightsSplit")
+    private List<Split> rightsSplit;
+
+    @XStreamOmitField
+    private List<AnnouncementSplit> announcementSplits;
+
+    @XStreamAlias("SharedIssuerDetails")
+    private List<Issuer> stapledSecurityIssuers;
+
+    @XStreamAlias("SpecificCountriesList")
+    private List<ForeignShareHolderSpecificCountries> specificCountriesList;
+
+    @XStreamAlias(value = "MemberCircularTradingDetailFields")
+    private List<TradingDetailsOnNilPaidRights> memberCircularTradingDetails;
+
+    @XStreamOmitField
+    private String contextMenu;
+
+    /**
+     * SDT-86405 :: Issuer name (this is populated via annotation). This property is used for email (passing issuerName as param in the email).
+     */
+    @XStreamOmitField
+    private String issuerName;
+
+    /**
+     * SDT-100896 :: Security details (this is populated via {@link PopulateSecurityDetails}). This property is used for email (passing secrurity details as
+     * param in the email).
+     */
+    @XStreamOmitField
+    private SecurityDetails securityDetails;
+
+    @XStreamAlias("MemberCircularFields")
+    private List<MemberCircularField> memberCircularList;
+
+    private String securityMarketCd;
+    
+    @XStreamOmitField
+    private ExternalSecurity caSecurity;
+
+
+    /**
+     * @return the id
+     */
+    @Id
+    @Column(name = CORPORATE_ACTION_ID)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ")
+    @SequenceGenerator(name = "SEQ", sequenceName = "SEQ_CORPORATE_ACTION", allocationSize = 1)
+    public Long getId() {
+        return id;
+    }
+
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSwiftEventTypeCode(CorporateAction clientModel)
+    {
+    	
+    String actionType = clientModel.getActionTypeCd();
+    if(DVCA_ENTITY.equalsIgnoreCase(actionType)) 
+        return DVCA;
+    else if(DRIP_ENTITY.equalsIgnoreCase(actionType)) 
+        return DRIP;
+    else if(DVOP_ENTITY.equalsIgnoreCase(actionType)) 
+        return DVOP;
+    else if(CAPD_ENTITY.equalsIgnoreCase(actionType)) 
+        return CAPD;
+    else if(CAPG_ENTITY.equalsIgnoreCase(actionType)) 
+        return CAPG;
+    else if(RHTS_ENTITY.equalsIgnoreCase(actionType)) 
+        return RHDI;
+    else if(REDM_ENTITY.equalsIgnoreCase(actionType)) 
+        return REDM;
+    else if(ACTV_ENTITY.equalsIgnoreCase(actionType)) 
+        return ACTV;
+    else if(BONU_ENTITY.equalsIgnoreCase(actionType)) 
+        return BONU;
+    else if(CHAN_ENTITY.equalsIgnoreCase(actionType)) 
+        return CHAN;
+    else if(DECR_ENTITY.equalsIgnoreCase(actionType)) 
+        return DECR;
+    else if(DLST_ENTITY.equalsIgnoreCase(actionType)) 
+        return DLST;
+    else if(DVSC_ENTITY.equalsIgnoreCase(actionType)) 
+        return DVSC;
+    else if(EXWA_ENTITY.equalsIgnoreCase(actionType)) 
+        return EXWA;
+    else if(INTR_ENTITY.equalsIgnoreCase(actionType)) 
+        return INTR;
+    else if(LIQU_ENTITY.equalsIgnoreCase(actionType)) 
+        return LIQU;
+    else if(MCAL_ENTITY.equalsIgnoreCase(actionType)) 
+        return MCAL;
+    else if(MRGR_ENTITY.equalsIgnoreCase(actionType)) 
+        return MRGR;
+    else if(PARI_ENTITY.equalsIgnoreCase(actionType)) 
+        return PARI;
+    else if(PCAL_ENTITY.equalsIgnoreCase(actionType)) 
+        return PCAL;
+    else if(REDM_ENTITY.equalsIgnoreCase(actionType)) 
+        return REDM;
+    else if(SOFF_ENTITY.equalsIgnoreCase(actionType)) 
+        return SOFF;
+    else if(SPLF_ENTITY.equalsIgnoreCase(actionType)) 
+        return SPLF;
+    else if(SPLR_ENTITY.equalsIgnoreCase(actionType)) 
+        return SPLR;
+    else if(SUSP_ENTITY.equalsIgnoreCase(actionType)) 
+        return SUSP;
+    else if(TEND_ENTITY.equalsIgnoreCase(actionType)) 
+        return TEND;
+    else if(BIDS_ENTITY.equalsIgnoreCase(actionType)) 
+        return BIDS;
+    else if(BPUT_ENTITY.equalsIgnoreCase(actionType)) 
+        return BPUT;
+    else if(CMET_ENTITY.equalsIgnoreCase(actionType)) 
+        return CMET;
+    else if(CONV_ENTITY.equalsIgnoreCase(actionType)) 
+        return CONV;
+    else if(EXOF_ENTITY.equalsIgnoreCase(actionType)) 
+        return EXOF;
+    else if(EXWA_ENTITY.equalsIgnoreCase(actionType)) 
+        return EXWA;
+    else if(MEET_ENTITY.equalsIgnoreCase(actionType)) 
+        return MEET;
+    else if(XMET_ENTITY.equalsIgnoreCase(actionType)) 
+        return XMET;
+    else
+    	return "null";
+    
+    }
+    /**
+     * @return the issuerId
+     */
+    @Column(name = ISSUER_ID)
+    public Long getIssuerId() {
+        return issuerId;
+    }
+
+    /**
+     * @param issuerId the issuerId to set
+     */
+    public void setIssuerId(Long issuerId) {
+        this.issuerId = issuerId;
+    }
+
+    /**
+     * @return the securityId
+     */
+    @Column(name = SECURITY_ID)
+    public Long getSecurityId() {
+        return securityId;
+    }
+
+    /**
+     * Get security Id for Fetching Security details. This returns the securityId property.
+     */
+    @Transient
+    public Long getSecurityIdForFetchingSecurityDetails() {
+        return getSecurityId();
+    }
+
+    /**
+     * @param securityId the securityId to set
+     */
+    public void setSecurityId(Long securityId) {
+        this.securityId = securityId;
+    }
+
+    /**
+     * @return the announcementStatusCd
+     */
+    @Column(name = ANNOUNCEMTENT_STATUS_CD)
+    public String getAnnouncementStatusCd() {
+        return announcementStatusCd;
+    }
+
+    /**
+     * @param announcementStatusCd the announcementStatusCd to set
+     */
+    public void setAnnouncementStatusCd(String announcementStatusCd) {
+        this.announcementStatusCd = announcementStatusCd;
+    }
+
+    /**
+     * @return the processingStatusCd
+     */
+    @Column(name = PROCESSING_STATUS_CD)
+    public String getProcessingStatusCd() {
+        return processingStatusCd;
+    }
+
+    /**
+     * @param processingStatusCd the processingStatusCd to set
+     */
+    public void setProcessingStatusCd(String processingStatusCd) {
+        this.processingStatusCd = processingStatusCd;
+    }
+
+    /**
+     * @return the actionTypeCd
+     */
+    @Column(name = ACTION_TYPE_CD)
+    public String getActionTypeCd() {
+        return this.actionTypeCd;
+    }
+
+    /**
+     * @param actionTypeCd the actionTypeCd to set
+     */
+    public void setActionTypeCd(String actionType) {
+        this.actionTypeCd = actionType;
+    }
+
+    /**
+     * @return the actionCategoryCd
+     */
+    @Column(name = ACTION_CATEGORY_CD)
+    public String getActionCategoryCd() {
+        return actionCategoryCd;
+    }
+
+    /**
+     * @param actionCategoryCd the actionCategoryCd to set
+     */
+    public void setActionCategoryCd(String actionCategoryCd) {
+        this.actionCategoryCd = actionCategoryCd;
+    }
+
+
+    /**
+     * @return the actionIndicatorCd
+     */
+    @Column(name = ACTION_INDICATOR_CD)
+    public String getActionIndicatorCd() {
+        return actionIndicatorCd;
+    }
+
+    /**
+     * @param actionIndicatorCd the actionIndicatorCd to set
+     */
+    public void setActionIndicatorCd(String actionIndicatorCd) {
+        this.actionIndicatorCd = actionIndicatorCd;
+    }
+
+    /**
+     * @return the reference
+     */
+    @Column(name = REFERENCE)
+    @SwiftValidation(attributeName = ICorporateActionConstants.ATTR_CA_REF)
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * @param reference the reference to set
+     */
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    /**
+     * @return the officialReference
+     */
+    @Column(name = OFFICIAL_REFERENCE)
+    public String getOfficialReference() {
+        return officialReference;
+    }
+
+    /**
+     * @param officialReference the officialReference to set
+     */
+    public void setOfficialReference(String officialReference) {
+        this.officialReference = officialReference;
+    }
+
+    /**
+     * @return the description
+     */
+    @Column(name = DESCRIPTION)
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the announcementTitle
+     */
+    @Column(name = ANNOUNCEMENT_TITLE)
+    public String getAnnouncementTitle() {
+        return announcementTitle;
+    }
+
+    /**
+     * @param announcementTitle the announcementTitle to set
+     */
+    public void setAnnouncementTitle(String announcementTitle) {
+        this.announcementTitle = announcementTitle;
+    }
+
+    /**
+     * @return the dividendTypeCd
+     */
+    @Column(name = DIVIDEND_TYPE_CD)
+    public String getDividendTypeCd() {
+        return dividendTypeCd;
+    }
+
+    /**
+     * @param dividendTypeCd the dividendTypeCd to set
+     */
+    public void setDividendTypeCd(String dividendTypeCd) {
+        this.dividendTypeCd = dividendTypeCd;
+    }
+
+    /**
+     * @return the overSubscription
+     */
+    @Column(name = OVER_SUBSCRIPTION)
+    public String getOverSubscription() {
+        return overSubscription;
+    }
+
+    /**
+     * @param overSubscription the overSubscription to set
+     */
+    public void setOverSubscription(String overSubscription) {
+        this.overSubscription = overSubscription;
+    }
+
+    /**
+     * @return the announcementDate
+     */
+    @Column(name = ANNOUNCEMENT_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getAnnouncementDate() {
+        return announcementDate;
+    }
+
+    /**
+     * @param announcementDate the announcementDate to set
+     */
+    public void setAnnouncementDate(IMDate announcementDate) {
+        this.announcementDate = announcementDate;
+    }
+
+    /**
+     * @return the recordDate
+     */
+    @Column(name = RECORD_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getRecordDate() {
+        return recordDate;
+    }
+
+    /**
+     * @param recordDate the recordDate to set
+     */
+    public void setRecordDate(IMDate recordDate) {
+        this.recordDate = recordDate;
+    }
+
+    /**
+     * @return the announcementCurrencyCd
+     */
+    @Column(name = ANNOUNCEMENT_CURRENCY_CD)
+    public String getAnnouncementCurrencyCd() {
+        return announcementCurrencyCd;
+    }
+
+    /**
+     * @param announcementCurrencyCd the announcementCurrencyCd to set
+     */
+    public void setAnnouncementCurrencyCd(String announcementCurrencyCd) {
+        this.announcementCurrencyCd = announcementCurrencyCd;
+    }
+
+    /**
+     * @param reasonForWithdrawal the reasonForWithdrawal to set
+     */
+    public void setReasonForWithdrawal(String reasonForWithdrawal) {
+        this.reasonForWithdrawal = reasonForWithdrawal;
+    }
+
+
+    /**
+     * @return the reasonForWithdrawal
+     */
+    @Column(name = REASON_FOR_WITHDRAWAL)
+    public String getReasonForWithdrawal() {
+        return reasonForWithdrawal;
+    }
+
+    /**
+     * @return the dates
+     */
+    @OneToMany(targetEntity = CorporateActionDate.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionDate> getDates() {
+        return dates;
+    }
+
+    /**
+     * @param dates the dates to set
+     */
+    public void setDates(List<CorporateActionDate> dates) {
+        this.dates = dates;
+    }
+
+    /**
+     * @return the options
+     */
+    @OneToMany(targetEntity = CorporateActionOption.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    @SwiftValidation
+    public List<CorporateActionOption> getOptions() {
+        return options;
+    }
+
+    /**
+     * @param options the options to set
+     */
+    public void setOptions(List<CorporateActionOption> options) {
+        this.options = options;
+    }
+
+    /**
+     * @return the places
+     */
+    @OneToMany(targetEntity = CorporateActionPlace.class, mappedBy = "corporateAction")
+    @Where(clause="PLACE_QUALIFIER_CD != 'PLACE_COIN'")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @SwiftValidation
+    @OrderBy
+    public List<CorporateActionPlace> getPlaces() {
+        return places;
+    }
+
+    /**
+     * @param places the places to set
+     */
+    public void setPlaces(List<CorporateActionPlace> places) {
+        this.places = places;
+    }
+
+    /**
+     * @return the narratives
+     */
+    @OneToMany(targetEntity = CorporateActionNarrative.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @SwiftValidation
+    @OrderBy
+    public List<CorporateActionNarrative> getNarratives() {
+        return narratives;
+    }
+
+    /**
+     * @param narratives the narratives to set
+     */
+    public void setNarratives(List<CorporateActionNarrative> narratives) {
+        this.narratives = narratives;
+    }
+
+    @Column(name = "CREATED_BY", nullable = false)
+    @Override
+    public long getCreatedBy() {
+        return super.getCreatedBy();
+    }
+
+    @Column(name = "CREATION_DATE", nullable = false)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    @Override
+    public IMDate getCreationDate() {
+        return super.getCreationDate();
+    }
+
+    @Column(name = "UPD_USER_ID", nullable = false)
+    @Override
+    public long getUpdUserId() {
+        return super.getUpdUserId();
+    }
+
+    @Column(name = "LAST_UPDATE_DATE", nullable = false)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    @Override
+    public IMDate getLastUpdateDate() {
+        return super.getLastUpdateDate();
+    }
+
+    @Transient
+    @Override
+    public Object getIdValue() {
+        return getId();
+    }
+
+    @Override
+    @Transient
+    public String getStatusCd() {
+        return getAnnouncementStatusCd();
+    }
+
+    @Override
+    public void setStatusCd(String statusCd) {
+        setAnnouncementStatusCd(statusCd);
+    }
+
+    /**
+     * @return the exDate
+     */
+    @Column(name = EX_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getExDate() {
+        return exDate;
+    }
+
+    /**
+     * @param exDate the exDate to set
+     */
+    public void setExDate(IMDate exDate) {
+        this.exDate = exDate;
+    }
+
+    /**
+     * @return the earliestPayDate
+     */
+    @Column(name = EARLIEST_PAY_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getEarliestPayDate() {
+        return earliestPayDate;
+    }
+
+    /**
+     * @param earliestPayDate the earliestPayDate to set
+     */
+    public void setEarliestPayDate(IMDate earliestPayDate) {
+        this.earliestPayDate = earliestPayDate;
+    }
+
+    /**
+     * @return the earliestDeadlineDate
+     */
+    @Column(name = EARLIEST_DEADLINE_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getEarliestDeadlineDate() {
+        return earliestDeadlineDate;
+    }
+
+    /**
+     * @param earliestDeadlineDate the earliestDeadlineDate to set
+     */
+    public void setEarliestDeadlineDate(IMDate earliestDeadlineDate) {
+        this.earliestDeadlineDate = earliestDeadlineDate;
+    }
+
+
+    /**
+     * @return the corporateActionExtension
+     */
+    @OneToOne(targetEntity = CorporateActionExtension.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    public CorporateActionExtension getClientExtension() {
+        return clientExtension;
+    }
+
+
+    /**
+     * @param corporateActionExtension the corporateActionExtension to set
+     */
+    public void setClientExtension(CorporateActionExtension corporateActionExtension) {
+        this.clientExtension = corporateActionExtension;
+    }
+
+    @OneToMany(targetEntity = CorporateActionIndicator.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionIndicator> getIndicators() {
+        return indicators;
+    }
+
+
+    public void setIndicators(List<CorporateActionIndicator> indicators) {
+        this.indicators = indicators;
+    }
+
+    /**
+     * @return the lastSentDate
+     */
+    @Column(name = LAST_SENT_DATE)
+    @Type(type = "com.im.hibernate.types.IMDateTimeType")
+    public IMDate getLastSentDate() {
+        return lastSentDate;
+    }
+
+    /**
+     * @param lastSentDate the lastSentDate to set
+     */
+    public void setLastSentDate(IMDate lastSentDate) {
+        this.lastSentDate = lastSentDate;
+    }
+
+    /**
+     * @return the disseminationStatusCd
+     */
+    @Column(name = DISSEMINATION_STATUS_CD)
+    public String getDisseminationStatusCd() {
+        return disseminationStatusCd;
+    }
+
+    /**
+     * @param disseminationStatusCd the disseminationStatusCd to set
+     */
+    public void setDisseminationStatusCd(String disseminationStatusCd) {
+        this.disseminationStatusCd = disseminationStatusCd;
+    }
+
+    /**
+     * @return the rates
+     */
+    @OneToMany(targetEntity = CorporateActionRate.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionRate> getRates() {
+        return rates;
+    }
+
+
+    /**
+     * @param rates the rates to set
+     */
+    public void setRates(List<CorporateActionRate> rates) {
+        this.rates = rates;
+    }
+
+    /**
+     * @return the quantities
+     */
+    @OneToMany(targetEntity = CorporateActionQuantity.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionQuantity> getQuantities() {
+        return quantities;
+    }
+
+
+    /**
+     * @param quantities the quantities to set
+     */
+    public void setQuantities(List<CorporateActionQuantity> quantities) {
+        this.quantities = quantities;
+    }
+
+    /**
+     * @return the classification
+     */
+    @OneToMany(targetEntity = CorporateActionClassification.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionClassification> getClassification() {
+        return classification;
+    }
+
+
+    /**
+     * @param classification the classification to set
+     */
+    public void setClassification(List<CorporateActionClassification> classification) {
+        this.classification = classification;
+    }
+
+
+    @Override
+    @Column(name = REJECTION_REASON)
+    public String getRejectionReason() {
+        return super.getRejectionReason();
+    }
+
+    /**
+     * Map the Corporate Action Intermediate Security
+     * 
+     * @return
+     */
+    @OneToOne(targetEntity = CorporateActionIntSecurity.class, mappedBy = "corporateAction", fetch = FetchType.LAZY)
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @SwiftValidation
+    public CorporateActionIntSecurity getCorpActionIntSecurity() {
+        return corpActionIntSecurity;
+    }
+
+    /**
+     * Set the Corporate Action Intermediate Security
+     * 
+     * @param corpActionIntSecurity
+     */
+    public void setCorpActionIntSecurity(CorporateActionIntSecurity corpActionIntSecurity) {
+        this.corpActionIntSecurity = corpActionIntSecurity;
+    }
+    
+    
+
+    
+    /**
+     * @return the caSecurity
+     */
+    @OneToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = SECURITY_ID , insertable=false, updatable=false)
+    public ExternalSecurity getCaSecurity() {
+        return caSecurity;
+    }
+
+
+    
+    /**
+     * @param caSecurity the caSecurity to set
+     */
+    public void setCaSecurity(ExternalSecurity caSecurity) {
+        this.caSecurity = caSecurity;
+    }
+
+
+    public void fetchCollectionsEagerly() {
+        // Fetch the lazy loading. The Child entities should be loaded.
+        if (getNarratives() != null) {
+            getNarratives().size();
+        }
+        if (getOptions() != null) {
+            getOptions().size();
+            for (CorporateActionOption option : getOptions()) {
+                option.fetchCollectionsEagerly();
+            }
+        }
+        if (getDates() != null) {
+            getDates().size();
+        }
+        if (getRates() != null) {
+            getRates().size();
+        }
+        if (getPlaces() != null) {
+            getPlaces().size();
+        }
+        if (getMemberCircularList() != null) {
+            getMemberCircularList().size();
+        }
+        if (getPeriods() != null) {
+            getPeriods().size();
+        }
+        if (getQuantities() != null) {
+            getQuantities().size();
+        }
+        if (getIndicators() != null) {
+            getIndicators().size();
+        }
+        if (getAmount() != null) {
+            getAmount().size();
+        }
+        if (getClassification() != null) {
+            getClassification().size();
+        }
+        if (getAnnouncementSplits() != null) {
+            getAnnouncementSplits().size();
+        }
+        if (getSpecificCountries() != null) {
+            getSpecificCountries().size();
+        }
+        if (getMemberCircularTradingDetails() != null) {
+            getMemberCircularTradingDetails().size();
+        }
+    }
+
+
+    /**
+     * @return the messageReference
+     */
+    @Transient
+    public String getMessageReference() {
+        return messageReference;
+    }
+
+
+    /**
+     * @param messageReference the messageReference to set
+     */
+    public void setMessageReference(String messageReference) {
+        this.messageReference = messageReference;
+    }
+
+
+    /**
+     * @return the lastMessageReference
+     */
+    @Transient
+    public String getLastMessageReference() {
+        return lastMessageReference;
+    }
+
+
+    /**
+     * @param lastMessageReference the lastMessageReference to set
+     */
+    public void setLastMessageReference(String lastMessageReference) {
+        this.lastMessageReference = lastMessageReference;
+    }
+
+
+    /**
+     * @return the messageFunction
+     */
+    @Transient
+    public String getMessageFunction() {
+        return messageFunction;
+    }
+
+
+    /**
+     * @param messageFunction the messageFunction to set
+     */
+    public void setMessageFunction(String messageFunction) {
+        this.messageFunction = messageFunction;
+    }
+
+
+    /**
+     * Required for Xstream conversion
+     * 
+     * @return the issuer
+     */
+    @Transient
+    public Issuer getIssuer() {
+        return issuer;
+    }
+
+
+    /**
+     * Required for Xstream conversion
+     * 
+     * @param issuer the issuer to set
+     */
+    public void setIssuer(Issuer issuer) {
+        this.issuer = issuer;
+    }
+
+
+    /**
+     * Required for Xstream conversion
+     * 
+     * @return the security
+     */
+    @Transient
+    public ExternalSecurity getSecurity() {
+        return security;
+    }
+
+
+    /**
+     * Required for Xstream conversion
+     * 
+     * @param security the security to set
+     */
+    public void setSecurity(ExternalSecurity security) {
+        this.security = security;
+    }
+
+    /**
+     * @return the amount
+     */
+    @OneToMany(targetEntity = CorporateActionAmount.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionAmount> getAmount() {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(List<CorporateActionAmount> amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * SDT-67499 Getter for created By Full Name for query (only for search purposes), this concatenates the first name and last name of the creator of the
+     * entity).
+     */
+    @Formula("(SELECT concat(concat(imc_user."
+            + User.FIRST_NAME_COLUMN_NAME
+            + ",' '),imc_user."
+            + User.LAST_NAME_COLUMN_NAME
+            + ") FROM "
+            + User.TABLE_NAME
+            + " imc_user WHERE imc_user."
+            + User.USER_STATUS_CODE_COLUMN_NAME
+            + "='"
+            + IUserConstant.STATUS_ACTIVE
+            + "' AND imc_user."
+            + User.USER_ID_COLUMN_NAME
+            + "=created_by )")
+    public String getCreatedByFullNameForQuery() {
+        return createdByFullNameForQuery;
+    }
+
+    /**
+     * Set created by full name for query.
+     * 
+     * @param createdByFullNameForQuery
+     */
+    public void setCreatedByFullNameForQuery(String createdByFullNameForQuery) {
+        this.createdByFullNameForQuery = createdByFullNameForQuery;
+    }
+
+
+    /*
+     * (non-Javadoc)
+     * @see com.im.imc.statuschangenotification.model.IHasSecurityForStatusChangeNotification#getSecurityForStatusChangeNotification()
+     */
+    @Transient
+    public List<String> getListOfSecurityOrInvestmentAccountIdsForStatusChangeNotification() {
+        return Arrays.asList(getSecurityIdForFetchingSecurityDetails().toString());
+    }
+
+
+    /*
+     * (non-Javadoc)
+     * @see com.im.imc.statuschangenotification.model.IStatusChangeNotifiable#getDateForStatusChangeNotification(java.lang.String)
+     */
+    @Transient
+    public IMDate getDateForStatusChangeNotification(String notificationDateCd) {
+        if (SUSP_ENTITY.equals(getActionTypeCd()))
+            return getCreationDate();
+        else
+            return CorporateActionUtil.getDateForStatusChangeNotification(this, notificationDateCd);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.im.imc.statuschangenotification.model.IStatusChangeNotifiable#getEntityId()
+     */
+    @Transient
+    public String getStatusChangeNotificationEntityId() {
+        return getReference();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Transient
+    public List<String> getStatusChangeNotificationStatusCdList() {
+        return Arrays.asList(getStatusCd());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Transient
+    public String getStatusChangeNotificationEntityTypeCd() {
+        return CorporateActionUtil.convertActionTypeCdToEntityTypeCdForISOEvents(getActionTypeCd());
+    }
+
+    @Transient
+    public boolean isEligibleForProvideProvisionalDetailsContextMenu(CorporateActionExtension clientExtension) {
+        if (clientExtension != null && clientExtension.getProvideProvisionalFlag() != null && clientExtension.getProvideProvisionalFlag()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Transient
+    public boolean isEligibleForProvideDetailsForRightsAcceptance(CorporateActionExtension clientExtension) {
+        return clientExtension.getIssuerBankName() != null
+                && clientExtension.getBranchIssuerBank() != null
+                && clientExtension.getIssuerBankCountry() != null
+                && clientExtension.getIssuerBankAccountName() != null
+                && clientExtension.getIssuerBankAccountNumber() != null
+                && clientExtension.getIssuerBankBic() != null;
+    }
+
+    @Transient
+    @Override
+    protected Object[] getVisitableMembers() {
+        return new Object[] { getOptions(),
+                getDates(),
+                getQuantities(),
+                getNarratives(),
+                getRates(),
+                getIndicators(),
+                getClientExtension(),
+                getCorpActionIntSecurity(),
+                getPlaces(),
+                getAmount(),
+                getClassification() };
+    }
+
+    @Transient
+    public Long getBucketId() {
+        return getId();
+    }
+
+
+    @Transient
+    public String getBucketTypeCd() {
+        return getActionTypeCd();
+    }
+
+
+    @Transient
+    public List<IMCDocumentStore> getDocumentsStore() {
+        return documentsStore;
+    }
+
+    public void setDocumentsStore(List<IMCDocumentStore> documentsStore) {
+        this.documentsStore = documentsStore;
+
+    }
+
+    @Transient
+    public String getEntityNameCd() {
+        return CorporateActionUtil.convertActionTypeCdToEntityTypeCdForISOEvents(getActionTypeCd());
+    }
+
+    /**
+     * @return the periods
+     */
+    @OneToMany(targetEntity = CorporateActionPeriod.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<CorporateActionPeriod> getPeriods() {
+        return periods;
+    }
+
+
+    /**
+     * @param rates the rates to set
+     */
+    public void setPeriods(List<CorporateActionPeriod> periods) {
+        this.periods = periods;
+    }
+
+    /**
+     * Get the Right split list
+     * 
+     * @return
+     */
+    @Transient
+    public List<Split> getRightsSplit() {
+        return rightsSplit;
+    }
+
+
+    /**
+     * set the Right split list
+     * 
+     * @param rightsSplit
+     */
+    public void setRightsSplit(List<Split> rightsSplit) {
+        this.rightsSplit = rightsSplit;
+    }
+
+    /**
+     * @return the specificCountry
+     */
+    @OneToMany(targetEntity = ForeignShareHolderSpecificCountries.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @OrderBy
+    public List<ForeignShareHolderSpecificCountries> getSpecificCountries() {
+        return specificCountriesList;
+    }
+
+    /**
+     * @param specificCountriesList
+     */
+    public void setSpecificCountries(List<ForeignShareHolderSpecificCountries> specificCountriesList) {
+        this.specificCountriesList = specificCountriesList;
+    }
+
+
+    /**
+     * @return the memberCircularTradingDetails
+     */
+    @OneToMany(targetEntity = TradingDetailsOnNilPaidRights.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    public List<TradingDetailsOnNilPaidRights> getMemberCircularTradingDetails() {
+        return memberCircularTradingDetails;
+    }
+
+
+    /**
+     * @param memberCircularTradingDetails the memberCircularTradingDetails to set
+     */
+    public void setMemberCircularTradingDetails(List<TradingDetailsOnNilPaidRights> memberCircularTradingDetails) {
+        this.memberCircularTradingDetails = memberCircularTradingDetails;
+    }
+
+
+    /**
+     * 
+     */
+    @Transient
+    public String getAnnounceableType() {
+        return ICorporateActionConstants.ANNOUNCEMENT_TYPE_CORPORATE_ACTION;
+    }
+
+    @Transient
+    public String getScreenStateXml() {
+        return screenXml;
+    }
+
+    public void setScreenStateXml(String xml) {
+        this.screenXml = xml;
+    }
+
+    @Transient
+    public List<Issuer> getStapledSecurityIssuers() {
+        return stapledSecurityIssuers;
+    }
+
+
+    public void setStapledSecurityIssuers(List<Issuer> stapledSecurityIssuers) {
+        this.stapledSecurityIssuers = stapledSecurityIssuers;
+    }
+
+    /**
+     * @return the announcement splits
+     */
+    @OneToMany(targetEntity = AnnouncementSplit.class, mappedBy = "corporateAction")
+    @JoinColumn(name = CORPORATE_ACTION_ID)
+    @Cascade( { CascadeType.EVICT })
+    @OrderBy
+    public List<AnnouncementSplit> getAnnouncementSplits() {
+        return announcementSplits;
+    }
+
+
+    /**
+     * Set the announcement splits
+     * 
+     * @param announcementSplits
+     */
+    public void setAnnouncementSplits(List<AnnouncementSplit> announcementSplits) {
+        this.announcementSplits = announcementSplits;
+    }
+
+    /**
+     * Get issuer name.
+     * 
+     * @return issuer name
+     * @since SDT-86405
+     */
+    @Transient
+    public String getIssuerName() {
+        return issuerName;
+    }
+
+    /**
+     * Set Issuer name.
+     * 
+     * @since SDT-86405.
+     */
+    public void setIssuerName(String issuerName) {
+        this.issuerName = issuerName;
+    }
+
+    /**
+     * Get security details.
+     * 
+     * @return
+     * @since SDT-100896
+     */
+    @Transient
+    public SecurityDetails getSecurityDetails() {
+        return securityDetails;
+    }
+
+    /**
+     * Set security details.
+     * 
+     * @since SDT-100896
+     */
+    public void setSecurityDetails(SecurityDetails securityDetails) {
+        this.securityDetails = securityDetails;
+    }
+
+    /**
+     * @return true if the status is Updated Pending Completion.
+     * @see com.im.imc.statuschangenotification.model.IStatusChangeNotifiable#isForceSendNotification()
+     * @since SDT-77879
+     */
+    @Transient
+    public boolean isForceSendNotification() {
+        if (UPDATED_PENDING_COMPLETION.equals(getStatusCd())) {
+            // force Send when status is Updated Pending Completion.
+            return true;
+        } else if (PENDING_ELIGIBILITY_PROCESSING.equals(getStatusCd())) {
+            return true;
+        } else if (PENDING_ELIGIBILITY.equals(getStatusCd())) {
+            return true;
+        } else if (PENDING_ELIGIBILITY_EXCLUSION.equals(getStatusCd())) {
+            return true;
+        } else if (PENDING_PAYMENT_ADVICE.equals(getStatusCd())) {
+            return true;
+        } else if (PENDING_REMITTANCE_TO_CDP.equals(getStatusCd())) {
+            return true;
+        } else if (PENDING_PAYMENT_OF_CDP_SERVICE.equals(getStatusCd())) {
+            return true;
+        } else if (ICorporateActionConstants.PENDING_AIP_ANNOUNCEMENT.equals(getStatusCd())) {
+            return true;
+        } else if (ICorporateActionConstants.PENDING_SHAREHOLDERS_APPROVAL.equals(getStatusCd())) {
+            return true;
+        } else if (ICorporateActionConstants.PENDING_RECORD_DATE_ANNOUNCEMENT.equals(getStatusCd())) {
+            return true;
+        } else if (ICorporateActionConstants.PENDING_RECORD_DATE_PROCESSING.equals(getStatusCd())) {
+            return true;
+        } else if (ICorporateActionConstants.PENDING_LISTING_PROCESSING.equals(getStatusCd())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Transient
+    public String getStatusChangeNotificationEntitySubType() {
+        return CorporateActionUtil.getEntitySubTypeForCorporateAction(this);
+    }
+
+    @Transient
+    public boolean excludeCreatorFromRecievingEmailNotification() {
+        return false;
+    }
+
+    @Transient
+    public Long getCreatedByIdForStatusChangeNotification() {
+        return null;
+    }
+
+    @Transient
+    public Map<String, Object> getCustomEmailParamsMap() {
+        Map<String, Object> params = new HashMap<String, Object>();
+        // SDT-86405 :: Return Issuer name.       
+        params.put(ISSUER_NAME_EMAIL_PARAM, getIssuerName());
+        if (getSecurityDetails() == null) {
+            // User no security found instance.
+            params.putAll(SecurityDetails.createSecurityNotFound().getEmailParameters());
+        } else {
+            // Populate security details to map.
+            params.putAll(getSecurityDetails().getEmailParameters());
+        }
+        return params;
+    }
+
+    @Transient
+    public boolean isSimpleMail() {
+        return false;
+    }
+
+    /**
+     * This method is added to enable check for a given event before sending mail to the corresponding entity. Example:-Rights Template(See CorporateAction.java
+     * for implementation)
+     */
+    @Transient
+    public boolean isEmailSendingApplicable(StatusChangeNotification statusChangeNotification) {
+        boolean listingConditionVerifiedFlag = false;
+        boolean shareCertifiedVerifiedFlag = false;
+        boolean lnqDoumentVerifiedFlag = false;
+        if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd()) && getClientExtension() != null) {
+            listingConditionVerifiedFlag = getClientExtension().getListingConditionsVerified();
+            shareCertifiedVerifiedFlag = getClientExtension().getShareCertificateVerified();
+            lnqDoumentVerifiedFlag = getClientExtension().getLnqDoumentVerified();
+        }
+
+        if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.PROVIDE_PROVISIONAL_DETAILS.equals(statusChangeNotification.getNextFunctionMnemonic())) {
+            if (getCorpActionIntSecurity().getRenounceableFlag()
+                    && (ICorporateActionConstants.NO.equals(getClientExtension().getForeignShareholderEligibilityFlag()) || (ICorporateActionConstants.YES.equals(getClientExtension().getForeignShareholderEligibilityFlag()) && ICorporateActionConstants.FSA_SPECIFIC_COUNTRIES.equals(getClientExtension().getForeignShareholderApplicability())))) {
+                if (clientExtension.getIssuerBankName() == null
+                        && clientExtension.getBranchIssuerBank() == null
+                        && clientExtension.getIssuerBankCountry() == null
+                        && clientExtension.getIssuerBankAccountName() == null
+                        && clientExtension.getIssuerBankAccountNumber() == null
+                        && clientExtension.getIssuerBankBic() == null
+                        && (clientExtension.getOisAttached() == null || !clientExtension.getOisAttached())
+                        && (clientExtension.getProvideProvisionalFlag() == null || !clientExtension.getProvideProvisionalFlag())
+                        && (getMemberCircularTradingDetails() == null || getMemberCircularTradingDetails().size() == 0)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && getClientExtension().getFinalAccessRightsQtyAllotted() != null
+                && !(listingConditionVerifiedFlag || shareCertifiedVerifiedFlag || lnqDoumentVerifiedFlag)) {
+            if (ICorporateActionConstants.RIGHTS_ACTION_REQUIRED.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && listingConditionVerifiedFlag
+                && (!(shareCertifiedVerifiedFlag || lnqDoumentVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_LISTING.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.VERIFY_LISTING_CONDITIONS.equals(getContextMenu())
+                && ((shareCertifiedVerifiedFlag && !lnqDoumentVerifiedFlag) || (!shareCertifiedVerifiedFlag && lnqDoumentVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_LISTING.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && shareCertifiedVerifiedFlag
+                && (!(listingConditionVerifiedFlag || lnqDoumentVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_SHARE.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.VERIFY_SHARE_CERTIFICATES.equals(getContextMenu())
+                && ((listingConditionVerifiedFlag && !lnqDoumentVerifiedFlag) || (!listingConditionVerifiedFlag && lnqDoumentVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_SHARE.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && lnqDoumentVerifiedFlag
+                && (!(listingConditionVerifiedFlag || shareCertifiedVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_LNQ.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.VERIFY_L_AND_Q_DOCUMENT.equals(getContextMenu())
+                && ((listingConditionVerifiedFlag && !shareCertifiedVerifiedFlag) || (!listingConditionVerifiedFlag && shareCertifiedVerifiedFlag))) {
+            if (ICorporateActionConstants.RIGHTS_INFORMATION_ONLY_LNQ.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.TRADING_DETAILS_ON_NIL_PAID_RIGHTS.equals(statusChangeNotification.getNextFunctionMnemonic())
+                && ICorporateActionConstants.PENDING_RECORD_DATE_PROCESSING.equals(statusChangeNotification.getEntityStatusCd())) {
+            if (getCorpActionIntSecurity().getRenounceableFlag()
+                    && (ICorporateActionConstants.NO.equals(getClientExtension().getForeignShareholderEligibilityFlag()) || (ICorporateActionConstants.YES.equals(getClientExtension().getForeignShareholderEligibilityFlag()) && ICorporateActionConstants.FSA_SPECIFIC_COUNTRIES.equals(getClientExtension().getForeignShareholderApplicability())))) {
+                if (getClientExtension().getIssuerBankName() == null
+                        && getClientExtension().getBranchIssuerBank() == null
+                        && getClientExtension().getIssuerBankCountry() == null
+                        && getClientExtension().getIssuerBankAccountName() == null
+                        && getClientExtension().getIssuerBankAccountNumber() == null
+                        && getClientExtension().getIssuerBankBic() == null
+                        && !getClientExtension().getOisAttached()
+                        && (getClientExtension().getProvideProvisionalFlag() == null || !getClientExtension().getProvideProvisionalFlag())
+                        && (getMemberCircularTradingDetails() == null || getMemberCircularTradingDetails().size() == 0)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (getClientExtension().getIssuerBankName() == null
+                        && getClientExtension().getBranchIssuerBank() == null
+                        && getClientExtension().getIssuerBankCountry() == null
+                        && getClientExtension().getIssuerBankAccountName() == null
+                        && getClientExtension().getIssuerBankAccountNumber() == null
+                        && getClientExtension().getIssuerBankBic() == null
+                        && !getClientExtension().getOisAttached()
+                        && (getMemberCircularTradingDetails() == null || getMemberCircularTradingDetails().size() == 0)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.CONFIRM_ALLOTMENT_EXCESS_SHARES.equals(statusChangeNotification.getNextFunctionMnemonic())
+                && ICorporateActionConstants.PENDING_CONFIRMATION_ALLOTMENT_EXCESS_SHARES.equals(statusChangeNotification.getEntityStatusCd())) {
+            if (getCorpActionIntSecurity().getRenounceableFlag()
+                    && ICorporateActionConstants.ENTITY_TYPE_CD_RHTS_RENOU_YES.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else if (!getCorpActionIntSecurity().getRenounceableFlag()
+                    && ICorporateActionConstants.ENTITY_TYPE_CD_RHTS_RENOU_NO.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.PROVIDE_FINAL_ACCEPTANCE_RIGHTS.equals(statusChangeNotification.getNextFunctionMnemonic())
+                && ICorporateActionConstants.PROVIDE_FINAL_ACCEPTANCE.equals(statusChangeNotification.getEntityStatusCd())) {
+            if (!getCorpActionIntSecurity().getRenounceableFlag()
+                    && ICorporateActionConstants.ENTITY_TYPE_CD_RHTS_RENOU_NO.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            }else if(getCorpActionIntSecurity().getRenounceableFlag()
+                    && (ICorporateActionConstants.NO.equals(getClientExtension().getForeignShareholderEligibilityFlag()) || (ICorporateActionConstants.YES.equals(getClientExtension().getForeignShareholderEligibilityFlag()) && ICorporateActionConstants.FSA_SPECIFIC_COUNTRIES.equals(getClientExtension().getForeignShareholderApplicability())))
+                    && ICorporateActionConstants.ENTITY_TYPE_CD_RHTS_RENOU_YES.equals(statusChangeNotification.getEntitySubTypeCd())) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else if (ICorporateActionConstants.ENTITY_TYPE_CD_RHTS.equals(statusChangeNotification.getEntityTypeCd())
+                && ICorporateActionConstants.PENDING_RECORD_DATE_PROCESSING.equals(statusChangeNotification.getEntityStatusCd())) {
+            if (clientExtension.getIssuerBankName() == null
+                    && clientExtension.getBranchIssuerBank() == null
+                    && clientExtension.getIssuerBankCountry() == null
+                    && clientExtension.getIssuerBankAccountName() == null
+                    && clientExtension.getIssuerBankAccountNumber() == null
+                    && clientExtension.getIssuerBankBic() == null
+                    && (clientExtension.getOisAttached() == null || !clientExtension.getOisAttached())
+                    && (getMemberCircularTradingDetails() == null || getMemberCircularTradingDetails().size() == 0)
+                    && (clientExtension.getProvideProvisionalFlag() == null || !clientExtension.getProvideProvisionalFlag())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    /**
+     * @return the memberCircularList
+     */
+
+    @Transient
+    public List<MemberCircularField> getMemberCircularList() {
+        return memberCircularList;
+    }
+
+
+    /**
+     * @param memberCircularList the memberCircularList to set
+     */
+    public void setMemberCircularList(List<MemberCircularField> memberCircularList) {
+        this.memberCircularList = memberCircularList;
+    }
+
+    /**
+     * Get related reference.
+     * 
+     * @return
+     */
+    @Column(name = RELATED_REFERENCE)
+    public String getRelatedReference() {
+        return relatedReference;
+    }
+
+    /**
+     * Set related reference.
+     * 
+     * @param relatedReference
+     */
+    public void setRelatedReference(String relatedReference) {
+        this.relatedReference = relatedReference;
+    }
+
+
+    /**
+     * @return the contextMenu
+     */
+    @Transient
+    public String getContextMenu() {
+        return contextMenu;
+    }
+
+
+    /**
+     * @param contextMenu the contextMenu to set
+     */
+    public void setContextMenu(String contextMenu) {
+        this.contextMenu = contextMenu;
+    }
+
+
+}
